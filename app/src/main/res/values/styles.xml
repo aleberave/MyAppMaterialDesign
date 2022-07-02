@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyChipStyle" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@drawable/my_selector_background_chip</item>
+        <item name="rippleColor">#CF00F4</item>
+    </style>
+
+    <style name="MyTextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="helperTextTextColor">#CF00F4</item>
+        <item name="counterTextColor">@drawable/my_selector_background_chip</item>
+    </style>
+
+</resources>
