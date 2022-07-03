@@ -1,7 +1,8 @@
-package ru.geekbrains.myappmaterialdesign
+package ru.geekbrains.myappmaterialdesign.view
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import coil.load
+import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
 import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 
@@ -67,24 +70,36 @@ class PictureOfTheDayFragment : Fragment() {
         var newMyDate: String
         with(binding) {
             today.setOnClickListener {
-                newMyDate = "${arr[2]}-${arr[1]}-${arr[0]}"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    newMyDate = LocalDate.now().toString()
+                } else {
+                    newMyDate = "${arr[2]}-${arr[1]}-${arr[0]}"
+                }
                 viewModel.sendRequest(newMyDate)
             }
             yesterday.setOnClickListener {
-                val number: Int = arr[0].toInt() - 1
-                newMyDate = if (number > 0) {
-                    "${arr[2]}-${arr[1]}-$number"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    newMyDate = LocalDate.now().minusDays(1).toString()
                 } else {
-                    "${arr[2]}-${arr[1]}-${arr[0]}"
+                    val number: Int = arr[0].toInt() - 1
+                    newMyDate = if (number > 0) {
+                        "${arr[2]}-${arr[1]}-$number"
+                    } else {
+                        "${arr[2]}-${arr[1]}-${arr[0]}"
+                    }
                 }
                 viewModel.sendRequest(newMyDate)
             }
             tda.setOnClickListener {
-                val number: Int = arr[0].toInt() - 2
-                newMyDate = if (number > 0) {
-                    "${arr[2]}-${arr[1]}-$number"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    newMyDate = LocalDate.now().minusDays(2).toString()
                 } else {
-                    "${arr[2]}-${arr[1]}-${arr[0]}"
+                    val number: Int = arr[0].toInt() - 2
+                    newMyDate = if (number > 0) {
+                        "${arr[2]}-${arr[1]}-$number"
+                    } else {
+                        "${arr[2]}-${arr[1]}-${arr[0]}"
+                    }
                 }
                 viewModel.sendRequest(newMyDate)
             }
@@ -114,7 +129,6 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.progressBarPictureOfTheDayFragment.visibility = View.GONE
                 binding.constraintPictureOfTheDayFragment.visibility = View.VISIBLE
                 binding.imageView.load(appState.pictureOfTheDayDTO.url) {
-                    //TODO HW настроить загрузку изображения: error() placeholder()
                     error(R.drawable.ic_error)
                     placeholder(R.drawable.ic_insights)
                 }

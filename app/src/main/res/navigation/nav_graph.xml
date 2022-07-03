@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/PictureOfTheDayFragment"
-        android:name="ru.geekbrains.myappmaterialdesign.PictureOfTheDayFragment"
+        android:name="ru.geekbrains.myappmaterialdesign.view.PictureOfTheDayFragment"
         android:label="@string/picture_of_the_day_fragment_label"
         tools:layout="@layout/fragment_picture_of_the_day">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="ru.geekbrains.myappmaterialdesign.SecondFragment"
+        android:name="ru.geekbrains.myappmaterialdesign.view.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
