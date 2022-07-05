@@ -4,6 +4,8 @@
     <style name="MyChipStyle" parent="Widget.Material3.Chip.Suggestion">
         <item name="chipBackgroundColor">@drawable/my_selector_background_chip</item>
         <item name="rippleColor">#CF00F4</item>
+        <item name="shapeAppearance">@style/MyShapeAppearanceSmallComponent</item>
+        <item name="android:textAppearance">@style/MyTextAppearanceLabelLarge</item>
     </style>
 
     <style name="MyTextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
@@ -11,4 +13,40 @@
         <item name="counterTextColor">@drawable/my_selector_background_chip</item>
     </style>
 
+    <style name="MyTabLayoutStyle" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorColor">?myColorSecond</item>
+        <item name="tabRippleColor">@drawable/my_ripple</item>
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorAnimationDuration">1000</item>
+    </style>
+
+    <style name="MyAppBottomBarStyle" parent="Widget.Material3.BottomAppBar">
+        <item name="backgroundTint">@color/bottomBarColor</item>
+        <item name="navigationIconTint">@color/white</item>
+        <item name="shapeAppearanceMediumComponent">@style/MyMediumShape</item>
+    </style>
+
+    <style name="MyShapeAppearanceSmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="MyTextAppearanceLabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/black_and_white_picture</item>
+        <item name="android:fontFamily">@font/azeret</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.1378571429</item>
+    </style>
+
+    <style name="MyMediumShape" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="MyAppToolBar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/bottomBarColor</item>
+    </style>
 </resources>

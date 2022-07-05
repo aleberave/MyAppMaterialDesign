@@ -4,13 +4,24 @@
     <!-- Strings used for fragments for navigation -->
     <string name="picture_of_the_day_fragment_label">Picture Of The Day Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="settings_fragment_label">Settings Fragment</string>
     <string name="next">Next</string>
+    <string name="favourite" translatable="false">Favourite</string>
+    <string name="settings" translatable="false">Settings</string>
     <string name="previous">Previous</string>
+    <string name="main">Main</string>
     <string name="today">TODAY</string>
     <string name="yesterday">YESTERDAY</string>
     <string name="TDA">TWO DAYS AGO</string>
     <string name="search_wiki" translatable="false">Найти в Википедии</string>
     <string name="wiki_helper_text" translatable="false">Поищите термин в википедии</string>
+    <string name="menu1">Theme red</string>
+    <string name="menu2">Theme blue</string>
+    <string name="menu3">Theme green</string>
+    <string name="onScreen1">На экран 1</string>
+    <string name="onScreen2">На экран 2</string>
+
+    <string name="empty">""</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -48,4 +59,5 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="todo">TODO</string>
 </resources>

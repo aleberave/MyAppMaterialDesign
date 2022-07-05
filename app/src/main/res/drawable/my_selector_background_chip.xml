@@ -7,7 +7,7 @@
     <item android:color="#000000" android:state_selected="true"/>
     <item android:color="#00FF0A" android:state_pressed="true"/>
     <item android:color="#FF1E00" android:state_checked="true"/>
-    <item android:color="#00FFFF" android:state_window_focused="true"/>
+    <item android:color="#02C5C5" android:state_window_focused="true"/>
 
     <!-- Not selected -->
     <item android:color="#003FF8" />

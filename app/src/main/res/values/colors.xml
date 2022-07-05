@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="myCustomFirst">#B8B800</color>
+    <color name="myCustomSecond">#8A8A01</color>
+    <color name="rippleColor">#8A5801</color>
+    <color name="bottomBarColor">#AC71FF</color>
+
 </resources>

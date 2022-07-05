@@ -4,9 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,12 +36,44 @@ class PictureOfTheDayFragment : Fragment() {
     ): View {
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
+    }
 
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_favorite -> {
+
+            }
+            R.id.action_settings -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
+                    .addToBackStack(getString(R.string.empty)).commit()
+//                findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
+
+            }
+            android.R.id.home -> {
+                requireActivity().let {
+                    BottomNavigationDrawerFragment().show(
+                        it.supportFragmentManager,
+                        "tag"
+                    )
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
+//        getMenu()
         viewModel.getLiveData().observe(
             viewLifecycleOwner
         ) { appState -> renderData(appState) }
@@ -52,6 +82,9 @@ class PictureOfTheDayFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        binding.buttonSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
         }
 
         getWikipedia()
@@ -70,19 +103,19 @@ class PictureOfTheDayFragment : Fragment() {
         var newMyDate: String
         with(binding) {
             today.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    newMyDate = LocalDate.now().toString()
+                newMyDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDate.now().toString()
                 } else {
-                    newMyDate = "${arr[2]}-${arr[1]}-${arr[0]}"
+                    "${arr[2]}-${arr[1]}-${arr[0]}"
                 }
                 viewModel.sendRequest(newMyDate)
             }
             yesterday.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    newMyDate = LocalDate.now().minusDays(1).toString()
+                newMyDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDate.now().minusDays(1).toString()
                 } else {
                     val number: Int = arr[0].toInt() - 1
-                    newMyDate = if (number > 0) {
+                    if (number > 0) {
                         "${arr[2]}-${arr[1]}-$number"
                     } else {
                         "${arr[2]}-${arr[1]}-${arr[0]}"
@@ -91,11 +124,11 @@ class PictureOfTheDayFragment : Fragment() {
                 viewModel.sendRequest(newMyDate)
             }
             tda.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    newMyDate = LocalDate.now().minusDays(2).toString()
+                newMyDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDate.now().minusDays(2).toString()
                 } else {
                     val number: Int = arr[0].toInt() - 2
-                    newMyDate = if (number > 0) {
+                    if (number > 0) {
                         "${arr[2]}-${arr[1]}-$number"
                     } else {
                         "${arr[2]}-${arr[1]}-${arr[0]}"
@@ -114,6 +147,39 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
     }
+
+//    private fun getMenu() {
+//        requireActivity().addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.menu_main, menu)
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                when (menuItem.itemId) {
+//                    R.id.action_favorite -> {}
+//                    R.id.action_settings -> {
+//                        requireActivity().supportFragmentManager.beginTransaction()
+//                            .replace(
+//                                R.id.nav_host_fragment_content_main,
+//                                SettingsFragment.newInstance()
+//                            ).addToBackStack(getString(R.string.empty)).commit()
+////                        findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
+//                    }
+//                    android.R.id.home -> {
+//                        requireActivity().let {
+//                            BottomNavigationDrawerFragment().show(
+//                                it.supportFragmentManager,
+//                                "tag"
+//                            )
+//                        }
+//                    }
+//                    else -> onMenuItemSelected(menuItem)
+//                }
+//                return true
+//            }
+//
+//        })
+//    }
 
     private fun renderData(appState: AppState) {
         when (appState) {

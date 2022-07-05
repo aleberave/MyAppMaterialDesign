@@ -1,19 +1,50 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.MyAppMaterialDesign" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MyAppMaterialDesign" parent="Theme.Material3.DynamicColors.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
-<!--        <item name="colorPrimary">#FF0101</item>-->
-<!--        <item name="colorOnSurface">#FF0101</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--        windowActionBar: false, windowActionBarOverlay: false, android:windowIsFloating: false,-->
+        <!--        windowActionModeOverlay: false, windowNoTitle: false-->
+
+        <item name="myColorFirst">@color/myCustomFirst</item>
+        <item name="myColorSecond">@color/myCustomSecond</item>
+        <item name="colorPrimary">?attr/myColorFirst</item>
+        <!--        <item name="colorOnSurface">?attr/myColorSecond</item>-->
         <item name="colorOnSecondaryContainer">#FF8401</item>
         <item name="colorPrimaryContainer">#01FFAF</item>
-<!--        <item name="colorSurface">#FF0101</item>-->
+        <!--        <item name="colorSurface">?attr/myColorSecond</item>-->
         <item name="colorOnSurfaceVariant">#BB01FF</item>
 
         <item name="chipStyle">@style/MyChipStyle</item>
         <item name="textInputStyle">@style/MyTextInputLayoutStyle</item>
+
+        <!--        <item name="textAppearanceLabelLarge">@style/MyTextAppearanceLabelLarge</item>-->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="bottomAppBarStyle">@style/MyAppBottomBarStyle</item>
+        <item name="appBarLayoutStyle">@style/MyAppToolBar</item>
     </style>
 
     <style name="Theme.MyAppMaterialDesign" parent="Base.Theme.MyAppMaterialDesign" />
+
+    <style name="MyNewTheme" parent="Base.Theme.MyAppMaterialDesign" />
+
+    <style name="MyRedTheme" parent="MyNewTheme">
+        <item name="myColorFirst">#FF0101</item>
+        <item name="myColorSecond">#B30000</item>
+    </style>
+
+    <style name="MyGreenTheme" parent="MyNewTheme">
+        <item name="myColorFirst">#1EF41E</item>
+        <item name="myColorSecond">#139713</item>
+    </style>
+
+    <style name="MyBlueTheme" parent="MyNewTheme">
+        <item name="myColorFirst">#0D96FF</item>
+        <item name="myColorSecond">#075B9C</item>
+    </style>
 </resources>
