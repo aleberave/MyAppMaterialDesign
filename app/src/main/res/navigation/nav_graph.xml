@@ -38,4 +38,19 @@
             android:id="@+id/action_SettingsFragment_to_FirstFragment"
             app:destination="@id/PictureOfTheDayFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/EarthFragment"
+        android:name="ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_earth" />
+    <fragment
+        android:id="@+id/SystemFragment"
+        android:name="ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_system" />
+    <fragment
+        android:id="@+id/MarsFragment"
+        android:name="ru.geekbrains.myappmaterialdesign.view.navigation.MarsFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_mars" />
 </navigation>

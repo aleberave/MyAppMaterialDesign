@@ -34,17 +34,17 @@
     <style name="MyNewTheme" parent="Base.Theme.MyAppMaterialDesign" />
 
     <style name="MyRedTheme" parent="MyNewTheme">
-        <item name="myColorFirst">#FF0101</item>
-        <item name="myColorSecond">#B30000</item>
+        <item name="myColorFirst">@color/redThemeFirst</item>
+        <item name="myColorSecond">@color/redThemeSecond</item>
     </style>
 
     <style name="MyGreenTheme" parent="MyNewTheme">
-        <item name="myColorFirst">#1EF41E</item>
-        <item name="myColorSecond">#139713</item>
+        <item name="myColorFirst">@color/greenThemeFirst</item>
+        <item name="myColorSecond">@color/greenThemeSecond</item>
     </style>
 
     <style name="MyBlueTheme" parent="MyNewTheme">
-        <item name="myColorFirst">#0D96FF</item>
-        <item name="myColorSecond">#075B9C</item>
+        <item name="myColorFirst">@color/blueThemeFirst</item>
+        <item name="myColorSecond">@color/blueThemeSecond</item>
     </style>
 </resources>

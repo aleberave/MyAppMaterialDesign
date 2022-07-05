@@ -45,32 +45,7 @@ class SettingsFragment : Fragment() {
         }
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> {
-                        Toast.makeText(
-                            requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                        ).show()
-                        setCurrentTheme(ThemeRed)
-//                        requireActivity().recreate()
-//                        requireActivity().onBackPressed()
-                    }
-                    1 -> {
-                        Toast.makeText(
-                            requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                        ).show()
-                        setCurrentTheme(ThemeBlue)
-//                        requireActivity().recreate()
-//                        requireActivity().onBackPressed()
-                    }
-                    2 -> {
-                        Toast.makeText(
-                            requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                        ).show()
-                        setCurrentTheme(ThemeGreen)
-//                        requireActivity().recreate()
-//                        requireActivity().onBackPressed()
-                    }
-                }
+                getTabSelected(tab)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -78,10 +53,36 @@ class SettingsFragment : Fragment() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                //TODO("Not yet implemented")
+                getTabSelected(tab)
             }
 
         })
+    }
+
+    private fun getTabSelected(tab: TabLayout.Tab?) {
+        when (tab?.position) {
+            0 -> {
+                Toast.makeText(
+                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
+                ).show()
+                setCurrentTheme(ThemeRed)
+                requireActivity().onBackPressed()
+            }
+            1 -> {
+                Toast.makeText(
+                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
+                ).show()
+                setCurrentTheme(ThemeBlue)
+                requireActivity().onBackPressed()
+            }
+            2 -> {
+                Toast.makeText(
+                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
+                ).show()
+                setCurrentTheme(ThemeGreen)
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     fun setCurrentTheme(currentTheme: Int) {

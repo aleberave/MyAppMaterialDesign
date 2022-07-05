@@ -3,7 +3,6 @@ package ru.geekbrains.myappmaterialdesign.view
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityMainBinding
+import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.ViewPagerAdapter
 
 
 const val ThemeRed = 1
@@ -91,12 +91,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // TODO не применяет красную тему
-        Log.i("@2 THEME", getCurrentTheme().toString())
     }
 
     private fun getCurrentTheme(): Int {

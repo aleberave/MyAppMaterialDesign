@@ -7,4 +7,16 @@
     <color name="rippleColor">#8A5801</color>
     <color name="bottomBarColor">#AC71FF</color>
 
+    <color name="redThemeFirst">#FF0101</color>
+    <color name="redThemeSecond">#B30000</color>
+
+    <color name="blueThemeFirst">#0D96FF</color>
+    <color name="blueThemeSecond">#075B9C</color>
+
+    <color name="greenThemeFirst">#1EF41E</color>
+    <color name="greenThemeSecond">#139713</color>
+
+    <color name="red">#AE0B0B</color>
+    <color name="green">#66EF12</color>
+    <color name="blue">#10B0F4</color>
 </resources>
