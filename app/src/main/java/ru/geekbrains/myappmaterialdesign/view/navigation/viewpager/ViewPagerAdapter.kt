@@ -10,6 +10,11 @@ import ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment
 class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {
 
+//TODO
+// Чтобы  вызвать в активити:
+//        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
+//        binding.tabLayout.setupWithViewPager(binding.viewPager)
+
     private val fragments = arrayOf(EarthFragment(), MarsFragment(), SystemFragment())
 
     override fun getCount(): Int {

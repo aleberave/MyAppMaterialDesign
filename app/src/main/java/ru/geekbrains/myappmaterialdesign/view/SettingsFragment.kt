@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentSettingsBinding
@@ -41,8 +39,11 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonMain.setOnClickListener {
-            findNavController().navigate(R.id.action_SettingsFragment_to_FirstFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, PictureOfTheDayFragment.newInstance())
+                .commit()
         }
+
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 getTabSelected(tab)
@@ -62,30 +63,21 @@ class SettingsFragment : Fragment() {
     private fun getTabSelected(tab: TabLayout.Tab?) {
         when (tab?.position) {
             0 -> {
-                Toast.makeText(
-                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                ).show()
                 setCurrentTheme(ThemeRed)
-                requireActivity().onBackPressed()
+                requireActivity().recreate()
             }
             1 -> {
-                Toast.makeText(
-                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                ).show()
                 setCurrentTheme(ThemeBlue)
-                requireActivity().onBackPressed()
+                requireActivity().recreate()
             }
             2 -> {
-                Toast.makeText(
-                    requireContext(), tab.position.toString(), Toast.LENGTH_SHORT
-                ).show()
                 setCurrentTheme(ThemeGreen)
-                requireActivity().onBackPressed()
+                requireActivity().recreate()
             }
         }
     }
 
-    fun setCurrentTheme(currentTheme: Int) {
+    private fun setCurrentTheme(currentTheme: Int) {
         val sharedPreferences =
             requireActivity().getSharedPreferences(
                 KEY_SP,

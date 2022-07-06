@@ -8,13 +8,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityMainBinding
-import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.ViewPagerAdapter
 
 
 const val ThemeRed = 1
@@ -26,7 +21,6 @@ const val KEY_SP_CURRENT_THEME = "current_theme"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,39 +34,41 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-//        binding.fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAnchorView(R.id.fab)
-//                .setAction("Action", null).show()
-//        }
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.nav_host_fragment_content_main, PictureOfTheDayFragment.newInstance())
+                .commit()
+        }
+        if (savedInstanceState != null && theme.toString() != getRealStyle(getCurrentTheme()).toString()) {
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.nav_host_fragment_content_main,
+                    PictureOfTheDayFragment.newInstance()
+                )
+                .commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> {
+            R.id.action_favorite_activity_main -> {
+                true
+            }
+            R.id.action_settings_activity_main -> {
+                supportFragmentManager.beginTransaction()
+                    .remove(PictureOfTheDayFragment())
+                    .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
+                    .addToBackStack(getString(R.string.empty))
+                    .commit()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -107,8 +103,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun onResume() {
+        super.onResume()
         setTheme(getRealStyle(getCurrentTheme()))
     }
 

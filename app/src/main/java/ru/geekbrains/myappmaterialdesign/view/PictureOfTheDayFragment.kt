@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
+import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.BottomBarActivity
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
 import java.lang.Thread.sleep
@@ -23,12 +23,18 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+
 class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this)[PictureOfTheDayViewModel::class.java] }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = PictureOfTheDayFragment()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +47,7 @@ class PictureOfTheDayFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_main, menu)
+        inflater.inflate(R.menu.menu_fragment_settings, menu)
     }
 
     @Deprecated("Deprecated in Java")
@@ -53,15 +59,14 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.action_settings -> {
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
-                    .addToBackStack(getString(R.string.empty)).commit()
-//                findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
-
+                    .addToBackStack(getString(R.string.empty))
+                    .commit()
             }
             android.R.id.home -> {
                 requireActivity().let {
                     BottomNavigationDrawerFragment().show(
                         it.supportFragmentManager,
-                        "tag"
+                        bottom_navigation_drawer_fragment
                     )
                 }
             }
@@ -71,7 +76,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        (requireActivity() as BottomBarActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 //        getMenu()
         viewModel.getLiveData().observe(
@@ -80,11 +85,17 @@ class PictureOfTheDayFragment : Fragment() {
 
         viewModel.sendRequest()
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binding.buttonMain.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, SecondFragment.newInstance())
+                .addToBackStack(getString(R.string.empty))
+                .commit()
         }
         binding.buttonSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SettingsFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
+                .addToBackStack(getString(R.string.empty))
+                .commit()
         }
 
         getWikipedia()

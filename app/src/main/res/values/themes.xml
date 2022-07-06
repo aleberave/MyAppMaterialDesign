@@ -2,12 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MyAppMaterialDesign" parent="Theme.Material3.DynamicColors.DayNight">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <!--        windowActionBar: false, windowActionBarOverlay: false, android:windowIsFloating: false,-->
-        <!--        windowActionModeOverlay: false, windowNoTitle: false-->
 
         <item name="myColorFirst">@color/myCustomFirst</item>
         <item name="myColorSecond">@color/myCustomSecond</item>
@@ -27,6 +23,8 @@
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
         <item name="bottomAppBarStyle">@style/MyAppBottomBarStyle</item>
         <item name="appBarLayoutStyle">@style/MyAppToolBar</item>
+
+        <item name="bottomNavigationStyle">@style/MyBottomNavigationView</item>
     </style>
 
     <style name="Theme.MyAppMaterialDesign" parent="Base.Theme.MyAppMaterialDesign" />

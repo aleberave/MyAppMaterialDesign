@@ -20,6 +20,10 @@
     <string name="menu3">Theme green</string>
     <string name="onScreen1">На экран 1</string>
     <string name="onScreen2">На экран 2</string>
+    <string name="earth" translatable="false">Earth</string>
+    <string name="mars" translatable="false">Mars</string>
+    <string name="system" translatable="false">System</string>
+    <string name="text" translatable="false">Text</string>
 
     <string name="empty">""</string>
 

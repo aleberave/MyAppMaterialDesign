@@ -1,16 +1,18 @@
 package ru.geekbrains.myappmaterialdesign.view.navigation.viewpager
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment
+import java.util.*
 
-class ViewPagerTwoAdapter(fragmentActivity: FragmentActivity) :
-    FragmentStateAdapter(fragmentActivity) {
+class ViewPagerTwoAdapter(fragment: EarthFragment) :
+    FragmentStateAdapter(fragment) {
 
-    private val fragments = arrayOf(EarthFragment(), MarsFragment(), SystemFragment())
+    private val fragments = arrayOf(
+        PictureOfTheDayFragmentSecond(0),
+        PictureOfTheDayFragmentSecond(1),
+        PictureOfTheDayFragmentSecond(2)
+    )
 
     override fun getItemCount(): Int {
         return fragments.size
