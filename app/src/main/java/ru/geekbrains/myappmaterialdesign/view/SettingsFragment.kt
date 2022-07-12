@@ -102,7 +102,7 @@ class SettingsFragment : Fragment() {
             ThemeRed -> R.style.MyRedTheme
             ThemeBlue -> R.style.MyBlueTheme
             ThemeGreen -> R.style.MyGreenTheme
-            else -> 0
+            else -> R.style.MyRedTheme
         }
     }
 

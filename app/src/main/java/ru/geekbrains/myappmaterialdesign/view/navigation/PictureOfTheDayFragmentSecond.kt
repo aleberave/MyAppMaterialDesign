@@ -1,4 +1,4 @@
-package ru.geekbrains.myappmaterialdesign.view.navigation.viewpager
+package ru.geekbrains.myappmaterialdesign.view.navigation
 
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDaySecondBinding
+import ru.geekbrains.myappmaterialdesign.utils.keyBundleFragmentVPTA
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
@@ -24,12 +25,21 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class PictureOfTheDayFragmentSecond(private val myPosition: Int) : Fragment() {
+class PictureOfTheDayFragmentSecond : Fragment() {
 
     private var _binding: FragmentPictureOfTheDaySecondBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this)[PictureOfTheDayViewModel::class.java] }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(bundle: Bundle): Fragment {
+            val fragmentSecond = PictureOfTheDayFragmentSecond()
+            fragmentSecond.arguments = bundle
+            return fragmentSecond
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +58,8 @@ class PictureOfTheDayFragmentSecond(private val myPosition: Int) : Fragment() {
         }
 
         getWikipedia()
-        getDay(myPosition)
+        val intMyPosition = arguments?.getInt(keyBundleFragmentVPTA)
+        getDay(intMyPosition!!)
     }
 
     private fun getDay(position: Int) {
@@ -117,7 +128,7 @@ class PictureOfTheDayFragmentSecond(private val myPosition: Int) : Fragment() {
             AppState.Loading -> {
                 binding.constraintPictureOfTheDayFragmentSecond.visibility = View.GONE
                 binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.VISIBLE
-                Thread { sleep(1000L) }.start()
+                Thread { sleep(100L) }.start()
             }
             is AppState.Success -> {
                 binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.GONE

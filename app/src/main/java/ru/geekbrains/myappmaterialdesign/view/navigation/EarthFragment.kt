@@ -13,8 +13,6 @@ import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.ViewPagerTwoA
 
 class EarthFragment : Fragment() {
 
-    private val myBundle = Bundle()
-
     private var _binding: FragmentEarthBinding? = null
     private val binding: FragmentEarthBinding
         get() = _binding!!
@@ -44,7 +42,7 @@ class EarthFragment : Fragment() {
                         0 -> getString(R.string.today)
                         1 -> getString(R.string.yesterday)
                         2 -> getString(R.string.TDA)
-                        else -> "Earth"
+                        else -> getString(R.string.earth)
                     }
                 }
             }

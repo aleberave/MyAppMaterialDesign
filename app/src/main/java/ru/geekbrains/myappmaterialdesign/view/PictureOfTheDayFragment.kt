@@ -11,7 +11,8 @@ import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
-import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.BottomBarActivity
+import ru.geekbrains.myappmaterialdesign.view.fragmentsecond.SecondFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.BottomBarActivity
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
 import java.lang.Thread.sleep

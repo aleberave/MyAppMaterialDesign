@@ -1,4 +1,4 @@
-package ru.geekbrains.myappmaterialdesign.view.navigation.viewpager
+package ru.geekbrains.myappmaterialdesign.view.navigation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,11 +6,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.badge.BadgeDrawable
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityBottomBarBinding
-import ru.geekbrains.myappmaterialdesign.view.SecondFragment
 import ru.geekbrains.myappmaterialdesign.view.SettingsFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment
+import ru.geekbrains.myappmaterialdesign.view.fragmentsecond.SecondFragment
 
 class BottomBarActivity : AppCompatActivity() {
 
