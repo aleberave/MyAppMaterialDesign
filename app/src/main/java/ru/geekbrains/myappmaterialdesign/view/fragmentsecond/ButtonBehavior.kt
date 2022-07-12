@@ -4,13 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.math.abs
 
-class ButtonBehavior(context: Context, attributeSet: AttributeSet) :
+class ButtonBehavior(context: Context, attributeSet: AttributeSet? = null) :
     CoordinatorLayout.Behavior<FloatingActionButton>(context, attributeSet) {
 
     override fun layoutDependsOn(

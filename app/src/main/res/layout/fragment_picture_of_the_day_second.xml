@@ -1,65 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.navigation.PictureOfTheDayFragmentSecond">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintPictureOfTheDayFragmentSecond"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintPictureOfTheDayFragmentSecond"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutWikipediaSecond"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:hint="@string/search_wiki"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconContentDescription="content_description_end_icon"
+            app:endIconDrawable="@drawable/ic_wikipedia"
+            app:endIconMode="custom"
+            app:helperText="@string/wiki_helper_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutWikipediaSecond"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/search_wiki"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:endIconContentDescription="content_description_end_icon"
-                app:endIconDrawable="@drawable/ic_wikipedia"
-                app:endIconMode="custom"
-                app:helperText="@string/wiki_helper_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputEditTextSecond"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textAutoCorrect" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageViewSecond"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEditTextSecond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/lorem_ipsum"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/inputLayoutWikipediaSecond" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:inputType="textAutoCorrect" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBarPictureOfTheDayFragmentSecond"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewSecond"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="visible"
+            android:layout_marginTop="16dp"
+            android:text="@string/lorem_ipsum"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputLayoutWikipediaSecond" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarPictureOfTheDayFragmentSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomSheetContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f6f6fa"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="50dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:id="@+id/bottomSheetLine"
+            android:layout_width="25dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#663b4351"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/bottomSheetDescriptionHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottomSheetLine"
+            tools:text="Two Clusters and a Comet" />
+
+        <TextView
+            android:id="@+id/bottomSheetDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bottomSheetDescriptionHeader" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

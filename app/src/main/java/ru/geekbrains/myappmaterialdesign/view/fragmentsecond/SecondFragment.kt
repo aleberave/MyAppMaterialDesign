@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentSecondBinding
@@ -34,28 +35,34 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (binding.fabSecondFragment.layoutParams as CoordinatorLayout.LayoutParams).behavior =
+            ButtonBehavior(requireContext())
+
         if (binding.fabSecondFragment.alpha == 0f) {
             binding.fabSecondFragment.isClickable = false
             binding.fabSecondFragment.isFocusable = false
         }
 
         binding.fabSecondSF.setOnClickListener { myFabSecondSF() }
-        binding.fab1SF.setOnClickListener { navigateTo(EarthFragment()) }
-        binding.fab2SF.setOnClickListener { navigateTo(MarsFragment()) }
-        binding.fab3SF.setOnClickListener { navigateTo(SystemFragment()) }
+        binding.fabEarthSF.setOnClickListener { navigateTo(EarthFragment()) }
+        binding.fabMarsSF.setOnClickListener { navigateTo(MarsFragment()) }
+        binding.fabSystemSF.setOnClickListener { navigateTo(SystemFragment()) }
     }
 
     private var isFabOpen = false
     private fun myFabSecondSF() {
         isFabOpen = !isFabOpen
         if (isFabOpen) {
-            binding.fab1SF.show()
-            binding.fab2SF.show()
-            binding.fab3SF.show()
+            binding.fabSecondSF.setImageResource(R.drawable.ic_back_fab)
+            binding.fabEarthSF.show()
+            binding.fabMarsSF.show()
+            binding.fabSystemSF.show()
         } else {
-            binding.fab1SF.hide()
-            binding.fab2SF.hide()
-            binding.fab3SF.hide()
+            binding.fabSecondSF.setImageResource(R.drawable.ic_plus_fab)
+            binding.fabEarthSF.hide()
+            binding.fabMarsSF.hide()
+            binding.fabSystemSF.hide()
         }
     }
 

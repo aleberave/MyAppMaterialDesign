@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myappmaterialdesign.databinding.StudyFragmentConstraintBarrierBinding
 
-class StudyConstraintFragment : Fragment() {
+class StudyConstraintBarrierFragment : Fragment() {
 
     private var _binding: StudyFragmentConstraintBarrierBinding? = null
     private val binding get() = _binding!!
 
     companion object {
         @JvmStatic
-        fun newInstance() = StudyConstraintFragment()
+        fun newInstance() = StudyConstraintBarrierFragment()
     }
 
     override fun onCreateView(

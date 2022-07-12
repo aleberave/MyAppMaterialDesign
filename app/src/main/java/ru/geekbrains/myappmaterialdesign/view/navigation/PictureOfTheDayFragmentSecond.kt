@@ -137,6 +137,8 @@ class PictureOfTheDayFragmentSecond : Fragment() {
                     error(R.drawable.ic_error)
                     placeholder(R.drawable.ic_insights)
                 }
+                binding.bottomSheetDescriptionHeader.text = appState.pictureOfTheDayDTO.title
+                binding.bottomSheetDescription.text = appState.pictureOfTheDayDTO.explanation
             }
         }
     }

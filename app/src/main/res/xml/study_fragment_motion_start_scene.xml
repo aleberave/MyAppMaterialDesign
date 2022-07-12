@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--    <Transition-->
+    <!--        app:constraintSetEnd="@layout/study_fragment_motion_end"-->
+    <!--        app:constraintSetStart="@layout/study_fragment_motion_start"-->
+    <!--        app:duration="2000">-->
+    <!--        <OnClick app:targetId="@+id/mbtnMS1" />-->
+    <!--    </Transition>-->
+
+    <!--    <Transition-->
+    <!--        app:constraintSetStart="@layout/study_fragment_motion_end"-->
+    <!--        app:constraintSetEnd="@layout/study_fragment_motion_start"-->
+    <!--        app:duration="2000">-->
+    <!--        <OnClick app:targetId="@+id/mbtnMS2" />-->
+    <!--    </Transition>-->
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/mbtnMS1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="first"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="@id/guideline3" />
+
+
+        <Constraint
+            android:id="@+id/mbtnMS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="second"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/mbtnMS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="second"
+            app:layout_constraintBottom_toBottomOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="@id/guideline3" />
+
+        <Constraint
+            android:id="@+id/mbtnMS1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="first"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/mbtnMS1" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/mbtnMS2" />
+    </Transition>
+</MotionScene>

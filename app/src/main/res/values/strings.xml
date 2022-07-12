@@ -65,4 +65,6 @@
     </string>
     <string name="todo">TODO</string>
     <string name="_10000000000">10000000000</string>
+    <string name="barrier">Barrier</string>
+    <string name="guideline">Guideline</string>
 </resources>

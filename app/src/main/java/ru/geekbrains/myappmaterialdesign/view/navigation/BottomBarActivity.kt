@@ -7,6 +7,7 @@ import com.google.android.material.badge.BadgeDrawable
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityBottomBarBinding
 import ru.geekbrains.myappmaterialdesign.view.SettingsFragment
+import ru.geekbrains.myappmaterialdesign.view.StudyConstraintGuidelineFragment
 import ru.geekbrains.myappmaterialdesign.view.fragmentsecond.SecondFragment
 
 class BottomBarActivity : AppCompatActivity() {
@@ -24,7 +25,10 @@ class BottomBarActivity : AppCompatActivity() {
                     navigateTo(EarthFragment());true
                 }
                 R.id.action_view_mars -> {
-                    navigateTo(MarsFragment());false
+                    // TODO у меня нет идей где применить Guideline и Barrier, Motion
+                    navigateTo(StudyConstraintGuidelineFragment());false
+//                    navigateTo(StudyConstraintBarrierFragment());false
+//                    navigateTo(StudyMotionFragment());false
                 }
                 R.id.action_view_system -> {
                     navigateTo(SystemFragment())

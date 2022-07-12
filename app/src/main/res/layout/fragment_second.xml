@@ -68,7 +68,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab1SF"
+            android:id="@+id/fabEarthSF"
             style="@style/Widget.Design.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             tools:ignore="MissingConstraints" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab2SF"
+            android:id="@+id/fabMarsSF"
             style="@style/Widget.Design.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             tools:ignore="MissingConstraints" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab3SF"
+            android:id="@+id/fabSystemSF"
             style="@style/Widget.Design.FloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

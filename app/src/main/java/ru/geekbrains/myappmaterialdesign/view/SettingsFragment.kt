@@ -38,11 +38,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonMain.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, PictureOfTheDayFragment.newInstance())
-                .commit()
-        }
+//        binding.buttonMain.setOnClickListener {
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .replace(R.id.nav_host_fragment_content_main, PictureOfTheDayFragment.newInstance())
+//                .commit()
+//        }
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
