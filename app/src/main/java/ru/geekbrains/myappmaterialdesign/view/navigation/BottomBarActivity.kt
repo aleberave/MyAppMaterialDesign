@@ -22,7 +22,7 @@ class BottomBarActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_view_earth -> {
-                    navigateTo(EarthFragment());true
+                    navigateTo(CosmosFragment());true
                 }
                 R.id.action_view_mars -> {
                     // TODO у меня нет идей где применить Guideline и Barrier, Motion
@@ -31,7 +31,7 @@ class BottomBarActivity : AppCompatActivity() {
 //                    navigateTo(StudyMotionFragment());false
                 }
                 R.id.action_view_system -> {
-                    navigateTo(SystemFragment())
+                    navigateTo(SystemPictureFragment())
                     binding.bottomNavigationView.removeBadge(R.id.action_view_system)
                     true
                 }

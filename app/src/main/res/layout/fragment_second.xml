@@ -35,7 +35,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSecondFragment"
+        android:id="@+id/fabToolBarSF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
@@ -44,15 +44,21 @@
         app:layout_behavior=".view.fragmentsecond.ButtonBehavior" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewSecond"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         app:layout_behavior=".view.fragmentsecond.NestedBehavior">
 
         <TextView
             android:id="@+id/textview_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="?actionBarSize"
+            android:fitsSystemWindows="true"
             android:text="@string/lorem_ipsum"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

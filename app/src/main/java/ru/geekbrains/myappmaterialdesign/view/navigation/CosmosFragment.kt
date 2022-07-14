@@ -11,7 +11,7 @@ import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentEarthBinding
 import ru.geekbrains.myappmaterialdesign.view.navigation.viewpager.ViewPagerTwoAdapter
 
-class EarthFragment : Fragment() {
+class CosmosFragment : Fragment() {
 
     private var _binding: FragmentEarthBinding? = null
     private val binding: FragmentEarthBinding

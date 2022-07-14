@@ -1,5 +1,6 @@
 package ru.geekbrains.myappmaterialdesign.view.fragmentsecond
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentSecondBinding
-import ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.EarthPictureFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.MarsPictureFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.SystemPictureFragment
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -19,6 +20,7 @@ class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
+    private var isFabOpen = false
 
     companion object {
         @JvmStatic
@@ -35,30 +37,33 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (binding.fabSecondFragment.layoutParams as CoordinatorLayout.LayoutParams).behavior =
+        if (isFabOpen) isFabOpen = false
+        (binding.fabToolBarSF.layoutParams as CoordinatorLayout.LayoutParams).behavior =
             ButtonBehavior(requireContext())
 
-        if (binding.fabSecondFragment.alpha == 0f) {
-            binding.fabSecondFragment.isClickable = false
-            binding.fabSecondFragment.isFocusable = false
+        if (binding.fabToolBarSF.alpha == 0f) {
+            binding.fabToolBarSF.isClickable = false
+            binding.fabToolBarSF.isFocusable = false
         }
 
         binding.fabSecondSF.setOnClickListener { myFabSecondSF() }
-        binding.fabEarthSF.setOnClickListener { navigateTo(EarthFragment()) }
-        binding.fabMarsSF.setOnClickListener { navigateTo(MarsFragment()) }
-        binding.fabSystemSF.setOnClickListener { navigateTo(SystemFragment()) }
+        binding.fabEarthSF.setOnClickListener { navigateTo(EarthPictureFragment()) }
+        binding.fabMarsSF.setOnClickListener { navigateTo(MarsPictureFragment()) }
+        binding.fabSystemSF.setOnClickListener { navigateTo(SystemPictureFragment()) }
     }
 
-    private var isFabOpen = false
     private fun myFabSecondSF() {
         isFabOpen = !isFabOpen
         if (isFabOpen) {
+            ObjectAnimator.ofFloat(binding.fabSecondSF, View.ROTATION, 0f, 360f)
+                .setDuration(500L).start()
             binding.fabSecondSF.setImageResource(R.drawable.ic_back_fab)
             binding.fabEarthSF.show()
             binding.fabMarsSF.show()
             binding.fabSystemSF.show()
         } else {
+            ObjectAnimator.ofFloat(binding.fabSecondSF, View.ROTATION, 360f, 0f)
+                .setDuration(500L).start()
             binding.fabSecondSF.setImageResource(R.drawable.ic_plus_fab)
             binding.fabEarthSF.hide()
             binding.fabMarsSF.hide()
@@ -68,7 +73,7 @@ class SecondFragment : Fragment() {
 
     private fun navigateTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment).commit()
+            .replace(R.id.container, fragment).addToBackStack(getString(R.string.empty)).commit()
     }
 
     override fun onDestroyView() {

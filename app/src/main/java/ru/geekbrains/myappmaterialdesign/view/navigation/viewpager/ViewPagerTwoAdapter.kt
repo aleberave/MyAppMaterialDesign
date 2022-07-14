@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.geekbrains.myappmaterialdesign.utils.keyBundleFragmentVPTA
-import ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.CosmosFragment
 import ru.geekbrains.myappmaterialdesign.view.navigation.PictureOfTheDayFragmentSecond
 
-class ViewPagerTwoAdapter(fragment: EarthFragment) :
+class ViewPagerTwoAdapter(fragment: CosmosFragment) :
     FragmentStateAdapter(fragment) {
 
     private val fragments = arrayOf(

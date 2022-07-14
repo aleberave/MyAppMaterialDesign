@@ -7,8 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDaySecondBinding
@@ -31,6 +37,8 @@ class PictureOfTheDayFragmentSecond : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by lazy { ViewModelProvider(this)[PictureOfTheDayViewModel::class.java] }
+
+    private var isImageClick = false
 
     companion object {
         @JvmStatic
@@ -60,6 +68,35 @@ class PictureOfTheDayFragmentSecond : Fragment() {
         getWikipedia()
         val intMyPosition = arguments?.getInt(keyBundleFragmentVPTA)
         getDay(intMyPosition!!)
+
+        getImageListener()
+    }
+
+    private fun getImageListener() {
+        binding.imageViewSecond.setOnClickListener {
+            isImageClick = !isImageClick
+            val transitionSet = TransitionSet()
+            val changeBounds = ChangeBounds()
+            changeBounds.duration = 1000L
+            val changeImageTransform = ChangeImageTransform()
+            changeImageTransform.duration = 1000L
+            transitionSet.addTransition(changeBounds)
+            transitionSet.addTransition(changeImageTransform)
+            TransitionManager.beginDelayedTransition(
+                binding.constraintPictureOfTheDayFragmentSecond,
+                transitionSet
+            )
+
+            val params = it.layoutParams as ConstraintLayout.LayoutParams
+            if (isImageClick) {
+                params.height = ConstraintLayout.LayoutParams.MATCH_PARENT
+                (it as ImageView).scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+                params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+                (it as ImageView).scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
+            it.layoutParams = params
+        }
     }
 
     private fun getDay(position: Int) {
@@ -128,7 +165,7 @@ class PictureOfTheDayFragmentSecond : Fragment() {
             AppState.Loading -> {
                 binding.constraintPictureOfTheDayFragmentSecond.visibility = View.GONE
                 binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.VISIBLE
-                Thread { sleep(100L) }.start()
+                Thread { sleep(10L) }.start()
             }
             is AppState.Success -> {
                 binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.GONE

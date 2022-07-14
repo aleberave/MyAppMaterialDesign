@@ -3,9 +3,9 @@ package ru.geekbrains.myappmaterialdesign.view.navigation.viewpager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import ru.geekbrains.myappmaterialdesign.view.navigation.EarthFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.SystemFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.CosmosFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.MarsPictureFragment
+import ru.geekbrains.myappmaterialdesign.view.navigation.SystemPictureFragment
 
 class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {
@@ -15,7 +15,7 @@ class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
 //        binding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager)
 //        binding.tabLayout.setupWithViewPager(binding.viewPager)
 
-    private val fragments = arrayOf(EarthFragment(), MarsFragment(), SystemFragment())
+    private val fragments = arrayOf(CosmosFragment(), MarsPictureFragment(), SystemPictureFragment())
 
     override fun getCount(): Int {
         return fragments.size

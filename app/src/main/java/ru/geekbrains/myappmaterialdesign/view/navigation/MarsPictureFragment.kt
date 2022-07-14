@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.geekbrains.myappmaterialdesign.databinding.FragmentSystemBinding
+import ru.geekbrains.myappmaterialdesign.databinding.FragmentMarsBinding
 
-class SystemFragment : Fragment() {
+class MarsPictureFragment : Fragment() {
 
-    private var _binding: FragmentSystemBinding? = null
-    val binding: FragmentSystemBinding
+    private var _binding: FragmentMarsBinding? = null
+    private val binding: FragmentMarsBinding
         get() = _binding!!
 
     companion object {
         @JvmStatic
-        fun newInstance() = SystemFragment()
+        fun newInstance() = MarsPictureFragment()
     }
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class SystemFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSystemBinding.inflate(inflater, container, false)
+        _binding = FragmentMarsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,5 +35,4 @@ class SystemFragment : Fragment() {
         _binding = null
         super.onDestroy()
     }
-
 }
