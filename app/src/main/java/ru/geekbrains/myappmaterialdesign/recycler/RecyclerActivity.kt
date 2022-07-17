@@ -39,12 +39,25 @@ class RecyclerActivity : AppCompatActivity() {
         adapter.setListDataRemove(data, it)
     }
 
+    private val callbackMoveUp = MoveUp {
+        if ((it - 1) > 0) { // TODO как-то странно работает
+            data.removeAt(it).apply { data.add(it - 1, this) }
+        }
+    }
+
+    private val callbackMoveDown = MoveDown {
+        if ((it + 1) < (data.size-2)) { // TODO так не работает
+            data.removeAt(it).apply { data.add(it + 1, this) }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = StudyActivityRecyclerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = RecyclerAdapter(data, callbackAdd, callbackRemove)
+        adapter =
+            RecyclerAdapter(data, callbackAdd, callbackRemove, callbackMoveUp, callbackMoveDown)
         binding.recyclerView.adapter = adapter
     }
 }

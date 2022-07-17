@@ -12,7 +12,10 @@ import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemSy
 class RecyclerAdapter(
     private var listData: List<Data>,
     val callbackAdd: AddItem,
-    val callbackRemove: RemoveItem
+    val callbackRemove: RemoveItem,
+    val callbackMoveUp: MoveUp,
+    val callbackMoveDown: MoveDown
+
 ) :
     RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
@@ -81,13 +84,17 @@ class RecyclerAdapter(
             binding.name.text = data.name
             binding.addItemImageView.setOnClickListener {
                 callbackAdd.add(layoutPosition)
-//                listData.add(layoutPosition, Data("MarsNew", type = TYPE_MARS))
-//                notifyItemInserted(layoutPosition)
             }
             binding.removeItemImageView.setOnClickListener {
                 callbackRemove.remove(layoutPosition)
-//                listData.removeAt(layoutPosition)
-//                notifyItemRemoved(layoutPosition)
+            }
+            binding.moveItemUp.setOnClickListener {
+                callbackMoveUp.moveUp(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition - 1)
+            }
+            binding.moveItemDown.setOnClickListener {
+                callbackMoveDown.moveDown(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
         }
     }
@@ -102,6 +109,14 @@ class RecyclerAdapter(
             binding.removeItemImageView.setOnClickListener {
                 callbackRemove.remove(layoutPosition)
             }
+            binding.moveItemUp.setOnClickListener {
+                callbackMoveUp.moveUp(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition - 1)
+            }
+            binding.moveItemDown.setOnClickListener {
+                callbackMoveDown.moveDown(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
+            }
         }
     }
 
@@ -114,6 +129,14 @@ class RecyclerAdapter(
             }
             binding.removeItemImageView.setOnClickListener {
                 callbackRemove.remove(layoutPosition)
+            }
+            binding.moveItemUp.setOnClickListener {
+                callbackMoveUp.moveUp(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition - 1)
+            }
+            binding.moveItemDown.setOnClickListener {
+                callbackMoveDown.moveDown(layoutPosition)
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
         }
     }
