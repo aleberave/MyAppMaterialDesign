@@ -9,8 +9,22 @@ import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemHe
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemMarsBinding
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemSystemBinding
 
-class RecyclerAdapter(private val listData: List<Data>) :
+class RecyclerAdapter(
+    private var listData: List<Data>,
+    val callbackAdd: AddItem,
+    val callbackRemove: RemoveItem
+) :
     RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
+
+    fun setListDataAdd(listDataNew: List<Data>, position: Int) {
+        listData = listDataNew
+        notifyItemInserted(position)
+    }
+
+    fun setListDataRemove(listDataNew: List<Data>, position: Int) {
+        listData = listDataNew
+        notifyItemRemoved(position)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return listData[position].type
@@ -43,20 +57,6 @@ class RecyclerAdapter(private val listData: List<Data>) :
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bind(listData[position])
-//        when (getItemViewType(position)) {
-//            TYPE_EARTH -> {
-//                (holder as EarthViewHolder).bind(listData[position])
-//            }
-//            TYPE_MARS -> {
-//                (holder as MarsViewHolder).bind(listData[position])
-//            }
-//            TYPE_SYSTEM -> {
-//                (holder as SystemViewHolder).bind(listData[position])
-//            }
-//            else -> {
-//                (holder as HeaderViewHolder).bind(listData[position])
-//            }
-//        }
     }
 
     override fun getItemCount(): Int {
@@ -75,24 +75,46 @@ class RecyclerAdapter(private val listData: List<Data>) :
         }
     }
 
-    class MarsViewHolder(val binding: StudyActivityRecyclerItemMarsBinding) :
+    inner class MarsViewHolder(val binding: StudyActivityRecyclerItemMarsBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Data) {
             binding.name.text = data.name
+            binding.addItemImageView.setOnClickListener {
+                callbackAdd.add(layoutPosition)
+//                listData.add(layoutPosition, Data("MarsNew", type = TYPE_MARS))
+//                notifyItemInserted(layoutPosition)
+            }
+            binding.removeItemImageView.setOnClickListener {
+                callbackRemove.remove(layoutPosition)
+//                listData.removeAt(layoutPosition)
+//                notifyItemRemoved(layoutPosition)
+            }
         }
     }
 
-    class EarthViewHolder(val binding: StudyActivityRecyclerItemEarthBinding) :
+    inner class EarthViewHolder(val binding: StudyActivityRecyclerItemEarthBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Data) {
             binding.name.text = data.name
+            binding.addItemImageView.setOnClickListener {
+                callbackAdd.add(layoutPosition)
+            }
+            binding.removeItemImageView.setOnClickListener {
+                callbackRemove.remove(layoutPosition)
+            }
         }
     }
 
-    class SystemViewHolder(val binding: StudyActivityRecyclerItemSystemBinding) :
+    inner class SystemViewHolder(val binding: StudyActivityRecyclerItemSystemBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Data) {
             binding.name.text = data.name
+            binding.addItemImageView.setOnClickListener {
+                callbackAdd.add(layoutPosition)
+            }
+            binding.removeItemImageView.setOnClickListener {
+                callbackRemove.remove(layoutPosition)
+            }
         }
     }
 
