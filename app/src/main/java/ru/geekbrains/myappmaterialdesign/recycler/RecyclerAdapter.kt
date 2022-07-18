@@ -3,7 +3,9 @@ package ru.geekbrains.myappmaterialdesign.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemEarthBinding
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemHeaderBinding
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerItemMarsBinding
@@ -13,10 +15,10 @@ class RecyclerAdapter(
     private var listData: MutableList<Pair<Data, Boolean>>,
     val callbackAdd: AddItem,
     val callbackRemove: RemoveItem,
-    val callbackMoveUp: MoveUp,
-    val callbackMoveDown: MoveDown
+    private val callbackMoveUp: MoveUp,
+    private val callbackMoveDown: MoveDown
 ) :
-    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
+    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     fun setListDataAdd(listDataNew: MutableList<Pair<Data, Boolean>>, position: Int) {
         listData = listDataNew
@@ -65,9 +67,48 @@ class RecyclerAdapter(
         return listData.size
     }
 
+    private fun getMoveItemUp(position: Int) {
+        if (position - 1 > 0) {
+            callbackMoveUp.moveUp(position)
+            notifyItemMoved(position, position - 1)
+        }
+    }
+
+    private fun getMoveItemDown(position: Int) {
+        if (listData.size > position + 1) {
+            callbackMoveDown.moveDown(position)
+            notifyItemMoved(position, position + 1)
+        }
+    }
+
+    private fun getDescription(position: Int) {
+        listData[position] = listData[position].let { it.first to !it.second }
+        notifyItemChanged(position)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (toPosition > 0) {
+            listData.removeAt(fromPosition).apply {
+                listData.add(toPosition, this)
+            }
+            notifyItemMoved(fromPosition, toPosition)
+        }
+    }
+
+    override fun onItemDismiss(position: Int) {
+        callbackRemove.remove(position)
+    }
+
     abstract class BaseViewHolder(val view: View) :
-        RecyclerView.ViewHolder(view) {
+        RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
         abstract fun bind(data: Pair<Data, Boolean>)
+        override fun onItemSelected() {
+            view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.white))
+        }
+
+        override fun onItemClear() {
+            view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.purple))
+        }
     }
 
     class HeaderViewHolder(val binding: StudyActivityRecyclerItemHeaderBinding) :
@@ -78,86 +119,55 @@ class RecyclerAdapter(
     }
 
     inner class MarsViewHolder(val binding: StudyActivityRecyclerItemMarsBinding) :
-        BaseViewHolder(binding.root) {
+        BaseViewHolder(binding.root), ItemTouchHelperViewHolder {
         override fun bind(data: Pair<Data, Boolean>) {
-            binding.name.text = data.first.name
-            binding.addItemImageView.setOnClickListener {
-                callbackAdd.add(layoutPosition)
-            }
-            binding.removeItemImageView.setOnClickListener {
-                callbackRemove.remove(layoutPosition)
-            }
-            binding.moveItemUp.setOnClickListener {
-                callbackMoveUp.moveUp(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition - 1)
-            }
-            binding.moveItemDown.setOnClickListener {
-                callbackMoveDown.moveDown(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition + 1)
-            }
+            with(binding) {
+                name.text = data.first.name
+                addItemImageView.setOnClickListener { callbackAdd.add(layoutPosition) }
+                removeItemImageView.setOnClickListener { callbackRemove.remove(layoutPosition) }
+                moveItemUp.setOnClickListener { getMoveItemUp(layoutPosition) }
+                moveItemDown.setOnClickListener { getMoveItemDown(layoutPosition) }
 
-            binding.marsImageView.setOnClickListener {
-                listData[layoutPosition] = listData[layoutPosition].let { it.first to !it.second }
-                notifyItemChanged(layoutPosition)
+                marsImageView.setOnClickListener { getDescription(layoutPosition) }
+                marsDescriptionTextView.visibility =
+                    if (listData[layoutPosition].second) View.VISIBLE else View.GONE
             }
-            binding.marsDescriptionTextView.visibility =
-                if (listData[layoutPosition].second) View.VISIBLE else View.GONE
         }
     }
 
     inner class EarthViewHolder(val binding: StudyActivityRecyclerItemEarthBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Pair<Data, Boolean>) {
-            binding.name.text = data.first.name
-            binding.addItemImageView.setOnClickListener {
-                callbackAdd.add(layoutPosition)
-            }
-            binding.removeItemImageView.setOnClickListener {
-                callbackRemove.remove(layoutPosition)
-            }
-            binding.moveItemUp.setOnClickListener {
-                callbackMoveUp.moveUp(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition - 1)
-            }
-            binding.moveItemDown.setOnClickListener {
-                callbackMoveDown.moveDown(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition + 1)
-            }
+            with(binding) {
+                name.text = data.first.name
+                addItemImageView.setOnClickListener { callbackAdd.add(layoutPosition) }
+                removeItemImageView.setOnClickListener { callbackRemove.remove(layoutPosition) }
+                moveItemUp.setOnClickListener { getMoveItemUp(layoutPosition) }
+                moveItemDown.setOnClickListener { getMoveItemDown(layoutPosition) }
 
-            binding.earthImageView.setOnClickListener {
-                listData[layoutPosition] = listData[layoutPosition].let { it.first to !it.second }
-                notifyItemChanged(layoutPosition)
+                earthImageView.setOnClickListener { getDescription(layoutPosition) }
+                earthDescriptionTextView.visibility =
+                    if (listData[layoutPosition].second) View.VISIBLE else View.GONE
             }
-            binding.earthDescriptionTextView.visibility =
-                if (listData[layoutPosition].second) View.VISIBLE else View.GONE
         }
     }
 
     inner class SystemViewHolder(val binding: StudyActivityRecyclerItemSystemBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(data: Pair<Data, Boolean>) {
-            binding.name.text = data.first.name
-            binding.addItemImageView.setOnClickListener {
-                callbackAdd.add(layoutPosition)
+            with(binding) {
+                name.text = data.first.name
+                addItemImageView.setOnClickListener { callbackAdd.add(layoutPosition) }
+                removeItemImageView.setOnClickListener { callbackRemove.remove(layoutPosition) }
+                moveItemUp.setOnClickListener { getMoveItemUp(layoutPosition) }
+                moveItemDown.setOnClickListener { getMoveItemDown(layoutPosition) }
+
+                systemImageView.setOnClickListener { getDescription(layoutPosition) }
+                systemDescriptionTextView.visibility =
+                    if (listData[layoutPosition].second) View.VISIBLE else View.GONE
             }
-            binding.removeItemImageView.setOnClickListener {
-                callbackRemove.remove(layoutPosition)
-            }
-            binding.moveItemUp.setOnClickListener {
-                callbackMoveUp.moveUp(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition - 1)
-            }
-            binding.moveItemDown.setOnClickListener {
-                callbackMoveDown.moveDown(layoutPosition)
-                notifyItemMoved(layoutPosition, layoutPosition + 1)
-            }
-            binding.systemImageView.setOnClickListener {
-                listData[layoutPosition] = listData[layoutPosition].let { it.first to !it.second }
-                notifyItemChanged(layoutPosition)
-            }
-            binding.systemDescriptionTextView.visibility =
-                if (listData[layoutPosition].second) View.VISIBLE else View.GONE
         }
     }
 
 }
+

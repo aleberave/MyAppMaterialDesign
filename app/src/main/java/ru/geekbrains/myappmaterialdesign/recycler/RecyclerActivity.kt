@@ -2,6 +2,7 @@ package ru.geekbrains.myappmaterialdesign.recycler
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import ru.geekbrains.myappmaterialdesign.databinding.StudyActivityRecyclerBinding
 
 class RecyclerActivity : AppCompatActivity() {
@@ -18,6 +19,18 @@ class RecyclerActivity : AppCompatActivity() {
         Pair(Data("Mars", type = TYPE_MARS), false),
     )
     lateinit var adapter: RecyclerAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = StudyActivityRecyclerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        adapter =
+            RecyclerAdapter(data, callbackAdd, callbackRemove, callbackMoveUp, callbackMoveDown)
+        binding.recyclerView.adapter = adapter
+
+        ItemTouchHelper(ItemTouchHelperCallBack(adapter)).attachToRecyclerView(binding.recyclerView)
+    }
 
     private val callbackAdd = AddItem {
         when (adapter.getItemViewType(it)) {
@@ -40,31 +53,10 @@ class RecyclerActivity : AppCompatActivity() {
     }
 
     private val callbackMoveUp = MoveUp {
-        if ((it - 1) > 0) { // TODO как-то странно работает
-            data.removeAt(it).apply { data.add(it - 1, this) }
-        }
+        data.removeAt(it).apply { data.add(it - 1, this) }
     }
 
     private val callbackMoveDown = MoveDown {
-        if ((it + 1) < (data.size - 2)) { // TODO так не работает
-            data.removeAt(it).apply { data.add(it + 1, this) }
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = StudyActivityRecyclerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        adapter =
-            RecyclerAdapter(data, callbackAdd, callbackRemove, callbackMoveUp, callbackMoveDown)
-        binding.recyclerView.adapter = adapter
-
-        val lat = 10
-        val lon = 30
-        val locationOne = lat to lon
-        locationOne.first
-        locationOne.second
-        val locationTwo = Pair(lat, lon)
+        data.removeAt(it).apply { data.add(it + 1, this) }
     }
 }
