@@ -8,27 +8,27 @@ class RecyclerActivity : AppCompatActivity() {
 
     private lateinit var binding: StudyActivityRecyclerBinding
     private val data = arrayListOf(
-        Data("Header", type = TYPE_HEADER),
-        Data("Earth", type = TYPE_EARTH),
-        Data("Earth", type = TYPE_EARTH),
-        Data("Mars", type = TYPE_MARS),
-        Data("Earth", type = TYPE_EARTH),
-        Data("System", type = TYPE_SYSTEM),
-        Data("Earth", type = TYPE_EARTH),
-        Data("Mars", type = TYPE_MARS),
+        Pair(Data("Header", type = TYPE_HEADER), false),
+        Pair(Data("Earth", type = TYPE_EARTH), false),
+        Pair(Data("Earth", type = TYPE_EARTH), false),
+        Pair(Data("Mars", type = TYPE_MARS), false),
+        Pair(Data("Earth", type = TYPE_EARTH), false),
+        Pair(Data("System", type = TYPE_SYSTEM), false),
+        Pair(Data("Earth", type = TYPE_EARTH), false),
+        Pair(Data("Mars", type = TYPE_MARS), false),
     )
     lateinit var adapter: RecyclerAdapter
 
     private val callbackAdd = AddItem {
         when (adapter.getItemViewType(it)) {
             TYPE_EARTH -> {
-                data.add(it, Data("EarthNew", type = TYPE_EARTH))
+                data.add(it, Pair(Data("EarthNew", type = TYPE_EARTH), false))
             }
             TYPE_MARS -> {
-                data.add(it, Data("MarsNew", type = TYPE_MARS))
+                data.add(it, Pair(Data("MarsNew", type = TYPE_MARS), false))
             }
             TYPE_SYSTEM -> {
-                data.add(it, Data("SystemNew", type = TYPE_SYSTEM))
+                data.add(it, Pair(Data("SystemNew", type = TYPE_SYSTEM), false))
             }
         }
         adapter.setListDataAdd(data, it)
@@ -46,7 +46,7 @@ class RecyclerActivity : AppCompatActivity() {
     }
 
     private val callbackMoveDown = MoveDown {
-        if ((it + 1) < (data.size-2)) { // TODO так не работает
+        if ((it + 1) < (data.size - 2)) { // TODO так не работает
             data.removeAt(it).apply { data.add(it + 1, this) }
         }
     }
@@ -59,5 +59,12 @@ class RecyclerActivity : AppCompatActivity() {
         adapter =
             RecyclerAdapter(data, callbackAdd, callbackRemove, callbackMoveUp, callbackMoveDown)
         binding.recyclerView.adapter = adapter
+
+        val lat = 10
+        val lon = 30
+        val locationOne = lat to lon
+        locationOne.first
+        locationOne.second
+        val locationTwo = Pair(lat, lon)
     }
 }
