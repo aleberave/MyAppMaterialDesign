@@ -7,6 +7,7 @@ const val TYPE_SYSTEM = 3
 
 
 data class Data(
+    val id: Int = 0,
     val name: String = "text",
     val description: String? = "description",
     val type: Int = TYPE_HEADER
