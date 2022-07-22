@@ -1,5 +1,6 @@
 package ru.geekbrains.myappmaterialdesign.view
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -11,7 +12,7 @@ import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
-import ru.geekbrains.myappmaterialdesign.view.fragmentsecond.SecondFragment
+import ru.geekbrains.myappmaterialdesign.view.fragmenttext.TextFragment
 import ru.geekbrains.myappmaterialdesign.view.navigation.BottomBarActivity
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
@@ -26,6 +27,8 @@ import java.util.*
  */
 
 class PictureOfTheDayFragment : Fragment() {
+
+    private var isRotation = true
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +62,7 @@ class PictureOfTheDayFragment : Fragment() {
             }
             R.id.action_settings -> {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
+                    .replace(R.id.container, SettingsFragment.newInstance())
                     .addToBackStack(getString(R.string.empty))
                     .commit()
             }
@@ -88,15 +91,23 @@ class PictureOfTheDayFragment : Fragment() {
 
         binding.buttonMain.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, SecondFragment.newInstance())
+                .replace(R.id.container, TextFragment.newInstance())
                 .addToBackStack(getString(R.string.empty))
                 .commit()
         }
         binding.buttonSettings.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, SettingsFragment.newInstance())
+                .replace(R.id.container, SettingsFragment.newInstance())
                 .addToBackStack(getString(R.string.empty))
                 .commit()
+        }
+
+        binding.fab.setOnClickListener {
+            isRotation = !isRotation
+            if (!isRotation)
+                ObjectAnimator.ofFloat(it, View.ROTATION, 0f, 315f).setDuration(1000L).start()
+            else
+                ObjectAnimator.ofFloat(it, View.ROTATION, 315f, 0f).setDuration(1000L).start()
         }
 
         getWikipedia()
@@ -199,13 +210,13 @@ class PictureOfTheDayFragment : Fragment() {
                 AppState.Error(Throwable(appState.error.message.toString()))
             }
             AppState.Loading -> {
-                binding.constraintPictureOfTheDayFragment.visibility = View.GONE
+                binding.imageView.visibility = View.GONE
                 binding.progressBarPictureOfTheDayFragment.visibility = View.VISIBLE
                 Thread { sleep(1000L) }.start()
             }
             is AppState.Success -> {
                 binding.progressBarPictureOfTheDayFragment.visibility = View.GONE
-                binding.constraintPictureOfTheDayFragment.visibility = View.VISIBLE
+                binding.imageView.visibility = View.VISIBLE
                 binding.imageView.load(appState.pictureOfTheDayDTO.url) {
                     error(R.drawable.ic_error)
                     placeholder(R.drawable.ic_insights)

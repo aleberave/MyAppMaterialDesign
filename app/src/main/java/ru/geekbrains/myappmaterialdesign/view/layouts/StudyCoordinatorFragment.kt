@@ -1,22 +1,20 @@
-package ru.geekbrains.myappmaterialdesign.view
+package ru.geekbrains.myappmaterialdesign.view.layouts
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.geekbrains.myappmaterialdesign.databinding.StudyFragmentMotionStartBinding
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsPictureFragment
+import ru.geekbrains.myappmaterialdesign.databinding.StudyFragmentCoordinatorBinding
 
-class StudyMotionFragment : Fragment() {
+class StudyCoordinatorFragment : Fragment() {
 
-    private var _binding: StudyFragmentMotionStartBinding? = null
-    private val binding: StudyFragmentMotionStartBinding
-        get() = _binding!!
+    private var _binding: StudyFragmentCoordinatorBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         @JvmStatic
-        fun newInstance() = MarsPictureFragment()
+        fun newInstance() = StudyCoordinatorFragment()
     }
 
     override fun onCreateView(
@@ -24,16 +22,18 @@ class StudyMotionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = StudyFragmentMotionStartBinding.inflate(inflater, container, false)
+        _binding = StudyFragmentCoordinatorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onDestroy() {
-        _binding = null
         super.onDestroy()
+        _binding = null
     }
+
 }

@@ -1,4 +1,4 @@
-package ru.geekbrains.myappmaterialdesign.view.fragmentsecond
+package ru.geekbrains.myappmaterialdesign.view.fragmenttext
 
 import android.content.Context
 import android.util.AttributeSet

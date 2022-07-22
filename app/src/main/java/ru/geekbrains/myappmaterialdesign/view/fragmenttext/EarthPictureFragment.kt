@@ -1,16 +1,16 @@
-package ru.geekbrains.myappmaterialdesign.view.navigation
+package ru.geekbrains.myappmaterialdesign.view.fragmenttext
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.geekbrains.myappmaterialdesign.databinding.FragmentMarsBinding
+import ru.geekbrains.myappmaterialdesign.databinding.FragmentEarthPictureBinding
 
-class MarsPictureFragment : Fragment() {
+class EarthPictureFragment : Fragment() {
 
-    private var _binding: FragmentMarsBinding? = null
-    private val binding: FragmentMarsBinding
+    private var _binding: FragmentEarthPictureBinding? = null
+    private val binding: FragmentEarthPictureBinding
         get() = _binding!!
 
     companion object {
@@ -23,13 +23,10 @@ class MarsPictureFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMarsBinding.inflate(inflater, container, false)
+        _binding = FragmentEarthPictureBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun onDestroy() {
         _binding = null

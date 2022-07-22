@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragmentsecond.SecondFragment">
+    tools:context=".view.fragmenttext.TextFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -41,17 +41,17 @@
         android:contentDescription="@string/todo"
         android:elevation="5dp"
         android:src="@android:drawable/star_big_on"
-        app:layout_behavior=".view.fragmentsecond.ButtonBehavior" />
+        app:layout_behavior=".view.fragmenttext.ButtonBehavior" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollViewSecond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:layout_behavior=".view.fragmentsecond.NestedBehavior">
+        app:layout_behavior=".view.fragmenttext.NestedBehavior">
 
         <TextView
-            android:id="@+id/textview_second"
+            android:id="@+id/textviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -71,7 +71,6 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabEarthSF"

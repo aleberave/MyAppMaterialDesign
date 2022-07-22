@@ -1,21 +1,22 @@
-package ru.geekbrains.myappmaterialdesign.view.navigation
+package ru.geekbrains.myappmaterialdesign.view.layouts
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.geekbrains.myappmaterialdesign.databinding.FragmentSystemBinding
+import ru.geekbrains.myappmaterialdesign.databinding.StudyFragmentMotionStartBinding
+import ru.geekbrains.myappmaterialdesign.view.fragmenttext.MarsPictureFragment
 
-class SystemPictureFragment : Fragment() {
+class StudyMotionFragment : Fragment() {
 
-    private var _binding: FragmentSystemBinding? = null
-    val binding: FragmentSystemBinding
+    private var _binding: StudyFragmentMotionStartBinding? = null
+    private val binding: StudyFragmentMotionStartBinding
         get() = _binding!!
 
     companion object {
         @JvmStatic
-        fun newInstance() = SystemPictureFragment()
+        fun newInstance() = MarsPictureFragment()
     }
 
     override fun onCreateView(
@@ -23,7 +24,7 @@ class SystemPictureFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSystemBinding.inflate(inflater, container, false)
+        _binding = StudyFragmentMotionStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,5 +36,4 @@ class SystemPictureFragment : Fragment() {
         _binding = null
         super.onDestroy()
     }
-
 }

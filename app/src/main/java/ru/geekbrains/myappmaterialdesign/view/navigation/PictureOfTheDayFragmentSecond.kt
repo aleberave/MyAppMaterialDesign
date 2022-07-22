@@ -172,7 +172,7 @@ class PictureOfTheDayFragmentSecond : Fragment() {
                 binding.constraintPictureOfTheDayFragmentSecond.visibility = View.VISIBLE
                 binding.imageViewSecond.load(appState.pictureOfTheDayDTO.url) {
                     error(R.drawable.ic_error)
-                    placeholder(R.drawable.ic_insights)
+                    placeholder(R.drawable.earth)
                 }
                 binding.bottomSheetDescriptionHeader.text = appState.pictureOfTheDayDTO.title
                 binding.bottomSheetDescription.text = appState.pictureOfTheDayDTO.explanation

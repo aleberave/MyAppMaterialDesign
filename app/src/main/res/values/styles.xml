@@ -64,4 +64,9 @@
         <item name="cornerSize">30dp</item>
     </style>
 
+    <style name="TextStyleRainbow">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
 </resources>

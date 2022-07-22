@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import ru.geekbrains.myappmaterialdesign.view.fragmentsecond.ButtonBehavior
+import ru.geekbrains.myappmaterialdesign.view.fragmenttext.ButtonBehavior
 
 class MyImageView @JvmOverloads constructor(
     context: Context,

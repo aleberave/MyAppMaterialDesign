@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import ru.geekbrains.myappmaterialdesign.view.navigation.CosmosFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.MarsPictureFragment
-import ru.geekbrains.myappmaterialdesign.view.navigation.SystemPictureFragment
+import ru.geekbrains.myappmaterialdesign.view.fragmenttext.MarsPictureFragment
+import ru.geekbrains.myappmaterialdesign.view.fragmenttext.SystemPictureFragment
 
 class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {

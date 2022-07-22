@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.layouts.LayoutsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineFirstSFL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineSecondSFL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/myChipGroupSFL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        app:chipSpacingHorizontal="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineSecondSFL"
+        app:layout_constraintStart_toEndOf="@+id/guidelineFirstSFL"
+        app:layout_constraintTop_toTopOf="parent"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/barrierSFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="barrier" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/guidelineSFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="guideline" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/coordinatorSFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coordinator" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/motionSFL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="motion" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <FrameLayout
+        android:id="@+id/newLayoutSFL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myChipGroupSFL" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
