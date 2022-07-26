@@ -31,6 +31,10 @@
 
     <style name="MyNewTheme" parent="Base.Theme.MyAppMaterialDesign" />
 
+    <style name="MyStartTheme" parent="Base.Theme.MyAppMaterialDesign">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="MyRedTheme" parent="MyNewTheme">
         <item name="myColorFirst">@color/redThemeFirst</item>
         <item name="myColorSecond">@color/redThemeSecond</item>

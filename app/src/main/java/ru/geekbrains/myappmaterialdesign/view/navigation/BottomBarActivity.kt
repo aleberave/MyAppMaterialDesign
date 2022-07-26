@@ -20,6 +20,7 @@ class BottomBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.MyNewTheme)
         binding = ActivityBottomBarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -29,7 +30,7 @@ class BottomBarActivity : AppCompatActivity() {
                     navigateTo(CosmosFragment());true
                 }
                 R.id.action_view_study_layout -> {
-                    // TODO у меня нет идей где применить Guideline и Barrier, Motion (Chip/TabLayout?!)
+                    // TODO у меня нет идей где применить Guideline и Barr ier, Motion (Chip/TabLayout?!)
 //                    navigateTo(StudyConstraintGuidelineFragment());false
 //                    navigateTo(StudyConstraintBarrierFragment());false
 //                    navigateTo(StudyMotionFragment());false
