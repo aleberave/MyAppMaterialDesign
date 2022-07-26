@@ -1,5 +1,6 @@
 package ru.geekbrains.myappmaterialdesign.view.navigation
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -10,9 +11,6 @@ import ru.geekbrains.myappmaterialdesign.view.PictureOfTheDayFragment
 import ru.geekbrains.myappmaterialdesign.view.SettingsFragment
 import ru.geekbrains.myappmaterialdesign.view.fragmenttext.TextFragment
 import ru.geekbrains.myappmaterialdesign.view.layouts.LayoutsFragment
-import ru.geekbrains.myappmaterialdesign.view.layouts.StudyConstraintBarrierFragment
-import ru.geekbrains.myappmaterialdesign.view.layouts.StudyConstraintGuidelineFragment
-import ru.geekbrains.myappmaterialdesign.view.layouts.StudyMotionFragment
 
 class BottomBarActivity : AppCompatActivity() {
 
@@ -20,7 +18,8 @@ class BottomBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.MyNewTheme)
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R)
+            setTheme(R.style.MyNewTheme)
         binding = ActivityBottomBarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
