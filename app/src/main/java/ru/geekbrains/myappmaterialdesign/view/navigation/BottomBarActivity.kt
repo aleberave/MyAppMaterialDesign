@@ -1,6 +1,5 @@
 package ru.geekbrains.myappmaterialdesign.view.navigation
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -57,7 +56,9 @@ class BottomBarActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
+            .replace(R.id.container, fragment).commit()
     }
 
 }

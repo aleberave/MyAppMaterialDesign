@@ -22,7 +22,6 @@ import ru.geekbrains.myappmaterialdesign.utils.keyBundleFragmentVPTA
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState
 import ru.geekbrains.myappmaterialdesign.viewmodel.PictureOfTheDayViewModel
-import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -66,6 +65,7 @@ class PictureOfTheDayFragmentSecond : Fragment() {
         }
 
         getWikipedia()
+
         val intMyPosition = arguments?.getInt(keyBundleFragmentVPTA)
         getDay(intMyPosition!!)
 
@@ -163,16 +163,11 @@ class PictureOfTheDayFragmentSecond : Fragment() {
                 AppState.Error(Throwable(appState.error.message.toString()))
             }
             AppState.Loading -> {
-                binding.constraintPictureOfTheDayFragmentSecond.visibility = View.GONE
-                binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.VISIBLE
-                Thread { sleep(10L) }.start()
+                binding.imageViewSecond.load(R.drawable.earth)
             }
             is AppState.Success -> {
-                binding.progressBarPictureOfTheDayFragmentSecond.visibility = View.GONE
-                binding.constraintPictureOfTheDayFragmentSecond.visibility = View.VISIBLE
                 binding.imageViewSecond.load(appState.pictureOfTheDayDTO.url) {
                     error(R.drawable.ic_error)
-                    placeholder(R.drawable.earth)
                 }
                 binding.bottomSheetDescriptionHeader.text = appState.pictureOfTheDayDTO.title
                 binding.bottomSheetDescription.text = appState.pictureOfTheDayDTO.explanation

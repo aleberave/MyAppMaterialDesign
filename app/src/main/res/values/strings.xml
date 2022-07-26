@@ -75,5 +75,7 @@
     <string name="large_text_system">Солнечная система — планетная система, включающая в себя центральную звезду Солнце и все естественные космические объекты, вращающиеся вокруг Солнца. Она сформировалась путём гравитационного сжатия газопылевого облака примерно 4,57 млрд лет назад.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_to_use_rainbow">How to use Rainbow</string>
+    <string name="tutorial_rainbow">Push and get on/off rainbow text</string>
 
 </resources>

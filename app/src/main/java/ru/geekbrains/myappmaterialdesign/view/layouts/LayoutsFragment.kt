@@ -31,23 +31,24 @@ class LayoutsFragment : Fragment() {
 
         with(binding) {
             barrierSFL.setOnClickListener {
-                getNewLayoutFragment(StudyConstraintBarrierFragment.newInstance())
+                navigateTo(StudyConstraintBarrierFragment.newInstance())
             }
             guidelineSFL.setOnClickListener {
-                getNewLayoutFragment(StudyConstraintGuidelineFragment.newInstance())
+                navigateTo(StudyConstraintGuidelineFragment.newInstance())
             }
             coordinatorSFL.setOnClickListener {
-                getNewLayoutFragment(StudyCoordinatorFragment.newInstance())
+                navigateTo(StudyCoordinatorFragment.newInstance())
             }
             motionSFL.setOnClickListener {
-                getNewLayoutFragment(StudyMotionFragment.newInstance())
+                navigateTo(StudyMotionFragment.newInstance())
             }
         }
     }
 
-    private fun getNewLayoutFragment(fragment: Fragment) {
+    private fun navigateTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.newLayoutSFL, fragment).commit()
+            .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
+            .add(R.id.newLayoutSFL, fragment).addToBackStack(getString(R.string.empty)).commit()
     }
 
     override fun onDestroy() {

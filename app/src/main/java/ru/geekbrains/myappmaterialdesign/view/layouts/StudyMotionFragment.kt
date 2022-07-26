@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myappmaterialdesign.databinding.StudyFragmentMotionStartBinding
-import ru.geekbrains.myappmaterialdesign.view.fragmenttext.MarsPictureFragment
+
 
 class StudyMotionFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class StudyMotionFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = MarsPictureFragment()
+        fun newInstance() = StudyMotionFragment()
     }
 
     override fun onCreateView(
@@ -26,10 +26,6 @@ class StudyMotionFragment : Fragment() {
     ): View {
         _binding = StudyFragmentMotionStartBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroy() {

@@ -20,17 +20,20 @@ import androidx.core.provider.FontsContractCompat
 import androidx.fragment.app.Fragment
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentTextBinding
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class TextFragment : Fragment() {
 
+    private var showRainbow = false
     private var _binding: FragmentTextBinding? = null
     private val binding get() = _binding!!
     private var isFabOpen = false
     private lateinit var spannableString: SpannableString
-    private lateinit var countDownTimer: CountDownTimer
+    private var countDownTimer: CountDownTimer? = null
 
     companion object {
         @JvmStatic
@@ -56,6 +59,19 @@ class TextFragment : Fragment() {
             binding.fabToolBarSF.isFocusable = false
         }
 
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (isAdded)// проверяем, не умер ли фрагент
+                show()
+        }, 500)
+        binding.fabToolBarSF.setOnClickListener {
+            if (!showRainbow) {
+                showRainbow = true
+                rainbow(1)
+            } else {
+                showRainbow = false
+                countDownTimer?.cancel()
+            }
+        }
         binding.fabSecondSF.setOnClickListener { myFabSecondTextFragment() }
         binding.fabEarthSF.setOnClickListener { navigateTo(EarthPictureFragment()) }
         binding.fabMarsSF.setOnClickListener { navigateTo(MarsPictureFragment()) }
@@ -76,7 +92,17 @@ class TextFragment : Fragment() {
         binding.textviewText.setText(spannableString, TextView.BufferType.SPANNABLE)
         spannableString = binding.textviewText.text as SpannableString
         getStrikeThroughSpan()
-        rainbow(1)
+    }
+
+    private fun show() {
+        GuideView.Builder(requireContext())
+            .setTitle(getString(R.string.how_to_use_rainbow))
+            .setContentText(getString(R.string.tutorial_rainbow))
+            .setTargetView(binding.fabToolBarSF)
+            .setGravity(smartdevelop.ir.eram.showcaseviewlib.config.Gravity.center)
+            .setDismissType(DismissType.anywhere) //optional - default dismissible by TargetView
+            .build()
+            .show()
     }
 
     private fun myFabSecondTextFragment() {
@@ -100,7 +126,14 @@ class TextFragment : Fragment() {
 
     private fun navigateTo(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment).addToBackStack(getString(R.string.empty)).commit()
+            .setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
+            .replace(R.id.container, fragment).addToBackStack(getString(R.string.empty))
+            .commit()
     }
 
     /**
@@ -144,7 +177,12 @@ class TextFragment : Fragment() {
             BulletSpan(10, ContextCompat.getColor(requireContext(), R.color.purple))
         }
         spannableString.setSpan(bulletSpanOne, 9, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(bulletSpanTwo, 20, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            bulletSpanTwo,
+            20,
+            text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
         /** все буквы t красного цвета */
         for (i in text.indices) {
@@ -160,7 +198,8 @@ class TextFragment : Fragment() {
 
         /** векторная картинка */
         val verticalAlignment = DynamicDrawableSpan.ALIGN_CENTER
-        val bitmap = ContextCompat.getDrawable(requireContext(), R.drawable.ic_earth)!!.toBitmap()
+        val bitmap =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_earth)!!.toBitmap()
         for (i in text.indices) {
             if (text[i] == 'o') {
                 spannableString.setSpan(
@@ -225,7 +264,11 @@ class TextFragment : Fragment() {
             if (current != it) { // TODO первый индекс-переноса пропускаем
                 spannableString.setSpan(
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                        BulletSpan(10, ContextCompat.getColor(requireContext(), R.color.purple), 20)
+                        BulletSpan(
+                            10,
+                            ContextCompat.getColor(requireContext(), R.color.purple),
+                            20
+                        )
                     } else {
                         BulletSpan(10, ContextCompat.getColor(requireContext(), R.color.purple))
                     },
@@ -432,7 +475,7 @@ class TextFragment : Fragment() {
                 Log.i("@2", "$currentCount")
             }
         }
-        countDownTimer.start()
+        (countDownTimer as CountDownTimer).start()
     }
 
     private fun getRainbowColors(countColor: Int) {
@@ -474,6 +517,6 @@ class TextFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        countDownTimer.cancel()
+        countDownTimer?.cancel()
     }
 }
