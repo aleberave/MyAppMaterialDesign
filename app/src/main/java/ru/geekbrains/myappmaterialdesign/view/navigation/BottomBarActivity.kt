@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.badge.BadgeDrawable
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityBottomBarBinding
-import ru.geekbrains.myappmaterialdesign.view.PictureOfTheDayFragment
-import ru.geekbrains.myappmaterialdesign.view.SettingsFragment
+import ru.geekbrains.myappmaterialdesign.view.bottom.PictureOfTheDayFragment
 import ru.geekbrains.myappmaterialdesign.view.fragmenttext.TextFragment
 import ru.geekbrains.myappmaterialdesign.view.layouts.LayoutsFragment
+import ru.geekbrains.myappmaterialdesign.view.settings.SettingsFragment
 
 class BottomBarActivity : AppCompatActivity() {
 
@@ -18,8 +18,7 @@ class BottomBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R)
-            setTheme(R.style.MyNewTheme)
+
         binding = ActivityBottomBarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

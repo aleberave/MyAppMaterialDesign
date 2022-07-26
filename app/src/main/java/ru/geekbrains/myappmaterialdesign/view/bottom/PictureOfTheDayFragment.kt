@@ -1,4 +1,4 @@
-package ru.geekbrains.myappmaterialdesign.view
+package ru.geekbrains.myappmaterialdesign.view.bottom
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -12,6 +12,7 @@ import coil.load
 import ru.geekbrains.myappmaterialdesign.R
 import ru.geekbrains.myappmaterialdesign.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.myappmaterialdesign.utils.pathWikipedia
+import ru.geekbrains.myappmaterialdesign.view.settings.SettingsFragment
 import ru.geekbrains.myappmaterialdesign.view.fragmenttext.TextFragment
 import ru.geekbrains.myappmaterialdesign.view.navigation.BottomBarActivity
 import ru.geekbrains.myappmaterialdesign.viewmodel.AppState

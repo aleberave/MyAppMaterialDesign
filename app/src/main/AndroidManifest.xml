@@ -22,8 +22,13 @@
         <activity
             android:name=".animation.AnimationActivity"
             android:exported="true" />
+
         <activity
             android:name=".view.navigation.BottomBarActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.navigation.StartActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/MySplashTheme">
@@ -35,9 +40,8 @@
         </activity>
 
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.settings.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.MyAppMaterialDesign" />
 
         <meta-data

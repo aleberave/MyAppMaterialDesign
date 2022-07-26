@@ -1,4 +1,4 @@
-package ru.geekbrains.myappmaterialdesign.view
+package ru.geekbrains.myappmaterialdesign.view.settings
 
 import android.content.res.Configuration
 import android.os.Build
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowCompat
 import ru.geekbrains.myappmaterialdesign.R
+import ru.geekbrains.myappmaterialdesign.view.bottom.PictureOfTheDayFragment
 import ru.geekbrains.myappmaterialdesign.databinding.ActivityMainBinding
 
 
